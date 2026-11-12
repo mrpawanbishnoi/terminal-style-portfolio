@@ -1,0 +1,325 @@
+ /* --- THEME DEFINITIONS --- */
+        :root {
+            --font-main: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-dark {
+            --bg-color: #1a1d24;
+            --window-bg: rgba(20, 22, 27, 0.7);
+            --window-border: rgba(255, 255, 255, 0.1);
+            --header-bg: rgba(40, 44, 52, 0.8);
+            --text-color: #e0e0e0;
+            --text-muted: #888;
+            --primary-color: #9f54ff;
+            --secondary-color: #54c6ff;
+            --accent-green: #2ecc71;
+            --accent-red: #e74c3c;
+            --accent-yellow: #f1c40f;
+            --terminal-prompt: #54c6ff;
+            --terminal-output: #2ecc71;
+        }
+
+        .theme-light {
+            --bg-color: #f0f2f5;
+            --window-bg: rgba(255, 255, 255, 0.7);
+            --window-border: rgba(0, 0, 0, 0.1);
+            --header-bg: rgba(230, 232, 235, 0.8);
+            --text-color: #2c3e50;
+            --text-muted: #7f8c8d;
+            --primary-color: #8e44ad;
+            --secondary-color: #2980b9;
+            --accent-green: #27ae60;
+            --accent-red: #c0392b;
+            --accent-yellow: #f39c12;
+            --terminal-prompt: #2980b9;
+            --terminal-output: #2c3e50;
+        }
+
+        .theme-matrix {
+            --bg-color: #000000;
+            --window-bg: rgba(0, 10, 0, 0.7);
+            --window-border: rgba(0, 255, 0, 0.3);
+            --header-bg: rgba(0, 20, 0, 0.8);
+            --text-color: #00ff00;
+            --text-muted: #008000;
+            --primary-color: #00ff00;
+            --secondary-color: #00ff00;
+            --accent-green: #00ff00;
+            --accent-red: #00ff00;
+            --accent-yellow: #00ff00;
+            --font-main: 'Fira Code', monospace;
+            --font-mono: 'Fira Code', monospace;
+            --terminal-prompt: #00ff00;
+            --terminal-output: #00ff00;
+        }
+
+        /* --- BASE STYLES --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: var(--font-main);
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease;
+        }
+
+        #desktop {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* --- TASKBAR --- */
+        #taskbar {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: max-content;
+            height: 60px;
+            background: var(--window-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--window-border);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+            z-index: 20000;
+        }
+
+        .dock-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            border-radius: 8px;
+            position: relative;
+            color: var(--text-color);
+        }
+        .dock-icon:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .dock-icon.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            width: 6px;
+            height: 6px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+        }
+
+        #clock {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        /* --- WINDOW STYLES --- */
+        .window {
+            position: absolute;
+            background: var(--window-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--window-border);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            min-width: 350px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            resize: both;
+            overflow: auto; /* Changed from hidden to allow resize handle to always be accessible */
+        }
+
+        .window-header {
+            height: 35px;
+            background: var(--header-bg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            cursor: move;
+            flex-shrink: 0;
+        }
+        .window-title { font-weight: 500; }
+        .window-controls { display: flex; gap: 8px; }
+        .control-btn { width: 14px; height: 14px; border-radius: 50%; cursor: pointer; }
+        .close-btn { background: var(--accent-red); }
+        .minimize-btn { background: var(--accent-yellow); }
+        .maximize-btn { background: var(--accent-green); }
+
+        .window-body {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            font-size: 1rem;
+        }
+
+        /* --- TERMINAL APP --- */
+        .terminal-body {
+            background: rgba(0,0,0,0.5);
+            font-family: var(--font-mono);
+            padding: 0.5rem;
+            height: 100%;
+            overflow-y: auto;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        .terminal-line { display: flex; }
+        .terminal-input-line { display: flex; }
+        .prompt { color: var(--terminal-prompt); margin-right: 0.5rem; }
+        .terminal-input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-color);
+            font-family: var(--font-mono);
+        }
+        .output { color: var(--terminal-output); }
+        .output.error { color: var(--accent-red); }
+        .output a { color: var(--secondary-color); text-decoration: underline; }
+        
+        /* --- GENERIC APP STYLES --- */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1.5rem;
+            align-content: start;
+        }
+        .app-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        .app-icon i { font-size: 3rem; margin-bottom: 0.5rem; width: 60px; height: 60px; display:flex; align-items:center; justify-content:center; background: rgba(0,0,0,0.2); border-radius: 10px;}
+        .app-icon span { font-size: 0.9rem; }
+
+        /* --- CHAT APP STYLES --- */
+        .chat-body-wrapper {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            height: 100%;
+        }
+        .message-area {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .message {
+            padding: 0.75rem 1rem;
+            border-radius: 15px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+        .message.user {
+            background: var(--primary-color);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+            color: #fff;
+        }
+        .message.bot {
+            background: #3a3f4b;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        .chat-input-area {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid var(--window-border);
+            flex-shrink: 0;
+        }
+        .chat-input {
+            flex-grow: 1;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--window-border);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            color: var(--text-color);
+            outline: none;
+        }
+        .send-btn {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            cursor: pointer;
+        }
+
+        /* --- MINDMAP APP STYLES --- */
+        .mindmap-body {
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            padding: 0;
+        }
+        .mindmap-canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+
+        /* --- RESPONSIVENESS IMPROVEMENTS --- */
+        @media (max-width: 768px) {
+            #taskbar {
+                width: 95%;
+                height: 55px;
+                padding: 0 0.5rem;
+                gap: 0.25rem;
+                border-radius: 12px;
+            }
+            .dock-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.3rem;
+            }
+            #clock {
+                font-size: 1rem;
+                top: 15px;
+                right: 15px;
+            }
+            .window {
+                /* On mobile, windows are non-resizable and take up most of the screen */
+                resize: none;
+                min-width: 0;
+                min-height: 0;
+                border-radius: 5px;
+            }
+            .app-grid {
+                gap: 1rem;
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+            .app-icon i {
+                font-size: 2.5rem;
+                width: 50px;
+                height: 50px;
+            }
+            .app-icon span {
+                font-size: 0.8rem;
+            }
+        }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Terminal Based Portfolio</title>
+    <meta name="description" content="Welcome to the production-ready digital workspace of Jane Doe. A fully functional, interactive OS in the browser showcasing projects, skills, and more.">
+    <meta name="keywords" content="interactive portfolio, web developer, creative coder, javascript, terminal, web os, front-end developer">
+    <meta name="author" content="Pawan Bishnoi">
+
+    <meta property="og:title" content="Pawan Bishnoi">
+    <meta property="og:description" content="A fully functional, interactive portfolio experience designed as a virtual operating system with a working terminal, themes, and apps.">
+    <meta property="og:image" content="https://placehold.co/1200x630/1a1d24/ffffff?text=DevOS+v3.2">
+    <meta property="og:url" content="https://pawanbishnoi.com/shellfolio">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" href="https://placehold.co/32x32/9f54ff/FFFFFF?text=PB" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/script.js"></script>
+</head>
+<body>
+
+    <div id="desktop">
+        <div id="clock"></div>
+    </div>
+
+    <div id="taskbar">
+        <div class="dock-icon" data-app-id="terminal" title="Terminal"><i class="fas fa-terminal"></i></div>
+        <div class="dock-icon" data-app-id="projects" title="Projects"><i class="fas fa-folder-open"></i></div>
+        <div class="dock-icon" data-app-id="mindmap" title="Skills Mindmap"><i class="fas fa-project-diagram"></i></div>
+        <div class="dock-icon" data-app-id="chat" title="Chat"><i class="fas fa-comments"></i></div>
+        <div class="dock-icon" data-app-id="socials" title="Socials"><i class="fas fa-address-book"></i></div>
+    </div>
+
+    <template id="window-template">
+        <div class="window">
+            <div class="window-header">
+                <span class="window-title"></span>
+                <div class="window-controls">
+                    <div class="control-btn minimize-btn"></div>
+                    <div class="control-btn maximize-btn"></div>
+                    <div class="control-btn close-btn"></div>
+                </div>
+            </div>
+            <div class="window-body"></div>
+        </div>
+    </template>
+
+    
+</body>
+</html>
